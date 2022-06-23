@@ -1,0 +1,13 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">MusicControl</string>s
+    <string name="on_off">开关：</string>
+    <string name="only_effect_screen_off">仅在熄屏状态下生效：</string>
+    <string name="long_press_time">长按生效时间(<xliff:g>%1$04d</xliff:g>)：</string>
+    <string name="vibrate_strength">振动反馈强度(<xliff:g>%1$04d</xliff:g>)：</string>
+    <string name="authorizationQuestion">使用说明：\n长按音量上键－>下一首，长按音量下键－>上一首，同时长按音量上下键－>暂停或播放。</string>
+    <string name="invalid_tip">本模块依赖Xposed框架，请确保Xposed框架已安装并且本模块已激活，否则无法使用。</string>
+    <string name="disabled_tip">当前模块处于被禁用状态，请使用adb命令 \"adb shell setprop persist.lingh.muco.enable true\" 解除禁用。</string>
+    <array name="xposed_scope">
+        <item>android</item>
+    </array>
+</resources>
