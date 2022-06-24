@@ -91,14 +91,13 @@ public class MyXposed implements IXposedHookLoadPackage {
                 private volatile boolean isTowPress;
                 private volatile boolean isUpKeyPress, isDownKeyPress;
                 private volatile long upKeyPressTime, downKeyPressTime;
-                private volatile boolean isChangeVolume;
+                private volatile boolean isUpKeyChange, isDownKeyChange;
                 private AudioManager audioManager;
                 private Vibrator vibrator;
                 private PowerManager powerManager;
                 private ScheduledFuture<?> future;
                 private ScheduledExecutorService executorService;
                 private Instrumentation instrumentation;
-
 
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) {
@@ -136,9 +135,9 @@ public class MyXposed implements IXposedHookLoadPackage {
                             KeyEvent event = (KeyEvent) param.args[0];
 
                             if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP) {
-                                if (isChangeVolume) {
+                                if (isUpKeyChange) {
                                     if (event.getAction() == KeyEvent.ACTION_UP) {
-                                        isChangeVolume = false;
+                                        isUpKeyChange = false;
                                     }
                                     return;
                                 }
@@ -168,23 +167,18 @@ public class MyXposed implements IXposedHookLoadPackage {
                                     future.cancel(false);
                                     isUpKeyPress = false;
                                     if (!isTowPress && event.getEventTime() - upKeyPressTime < myConfig.getLongPressTime()) {
-                                        isChangeVolume = true;
-                                        executorService.execute(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_VOLUME_UP);
-                                                XposedBridge.log("LinGH volume up");
-                                            }
-                                        });
+                                        isUpKeyChange = true;
+                                        instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_VOLUME_UP);
+                                        XposedBridge.log("LinGH volume up");
                                     }
                                 }
                                 param.setResult(0);
                             }
 
                             if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN) {
-                                if (isChangeVolume) {
+                                if (isDownKeyChange) {
                                     if (event.getAction() == KeyEvent.ACTION_UP) {
-                                        isChangeVolume = false;
+                                        isDownKeyChange = false;
                                     }
                                     return;
                                 }
@@ -215,14 +209,9 @@ public class MyXposed implements IXposedHookLoadPackage {
                                     future.cancel(false);
                                     isDownKeyPress = false;
                                     if (!isTowPress && event.getEventTime() - downKeyPressTime < myConfig.getLongPressTime()) {
-                                        isChangeVolume = true;
-                                        executorService.execute(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_VOLUME_DOWN);
-                                                XposedBridge.log("LinGH volume down");
-                                            }
-                                        });
+                                        isDownKeyChange = true;
+                                        instrumentation.sendKeyDownUpSync(KeyEvent.KEYCODE_VOLUME_DOWN);
+                                        XposedBridge.log("LinGH volume down");
                                     }
                                 }
                                 param.setResult(0);

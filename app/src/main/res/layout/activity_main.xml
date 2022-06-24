@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/ll_setting"
+            <TableLayout
+                android:id="@+id/tl_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
@@ -26,19 +26,17 @@
                 android:background="@drawable/box"
                 android:orientation="vertical"
                 android:padding="15dp"
+                android:shrinkColumns="0"
+                android:stretchColumns="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <TableRow android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:text="@string/on_off"
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
@@ -46,22 +44,20 @@
                     <Switch
                         android:id="@+id/sc_on_off"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:thumb="@drawable/switch_custom_thumb_selector"
-                        android:track="@drawable/switch_custom_track_selector" />
-                </LinearLayout>
+                        android:track="@drawable/switch_custom_track_selector"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </TableRow>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
+                <TableRow
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
                         android:text="@string/only_effect_screen_off"
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
@@ -69,24 +65,21 @@
                     <Switch
                         android:id="@+id/sc_only_effect_screen_off"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:thumb="@drawable/switch_custom_thumb_selector"
-                        android:track="@drawable/switch_custom_track_selector" />
-                </LinearLayout>
+                        android:track="@drawable/switch_custom_track_selector"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </TableRow>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
+                <TableRow
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/tv_long_press_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
                         android:text="@string/long_press_time"
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
@@ -94,11 +87,7 @@
                     <SeekBar
                         android:id="@+id/sb_long_press_time"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_toEndOf="@+id/tv_long_press_time"
+                        android:layout_height="wrap_content"
                         android:max="2000"
                         android:min="0"
                         android:paddingStart="0dp"
@@ -107,20 +96,16 @@
                         android:splitTrack="false"
                         android:thumb="@drawable/seek_bar_thumb"
                         android:thumbOffset="0dp" />
-                </RelativeLayout>
+                </TableRow>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
+                <TableRow
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/tv_vibrate_strength"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
                         android:text="@string/vibrate_strength"
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
@@ -128,11 +113,7 @@
                     <SeekBar
                         android:id="@+id/sb_vibrate_strength"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_toEndOf="@+id/tv_vibrate_strength"
+                        android:layout_height="wrap_content"
                         android:max="2000"
                         android:min="0"
                         android:paddingStart="0dp"
@@ -141,8 +122,8 @@
                         android:splitTrack="false"
                         android:thumb="@drawable/seek_bar_thumb"
                         android:thumbOffset="0dp" />
-                </RelativeLayout>
-            </LinearLayout>
+                </TableRow>
+            </TableLayout>
 
             <LinearLayout
                 android:id="@+id/ll_explain"
@@ -155,7 +136,7 @@
                 android:padding="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_setting">
+                app:layout_constraintTop_toBottomOf="@+id/tl_setting">
 
                 <TextView
                     android:layout_width="match_parent"
