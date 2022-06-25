@@ -3,6 +3,7 @@
     package="com.lingh.music.control">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/app"
